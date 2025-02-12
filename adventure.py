@@ -1,6 +1,8 @@
 """Emily Byrnes - the inventory and the dungeon of choices- week 4 coding assignment"""
 import random
 
+inventory = []
+
 def display_player_status(player_health):
     """displays the health of the player"""
     print(f"Your current health: {player_health}")
@@ -59,6 +61,24 @@ def check_for_treasure(has_treasure):
     if has_treasure is False:
         print("The monster did not have the treasure. You continue your journey.")
 
+def aquire_item(inventory, item):
+    inventory.append(item)
+    print(f"You aquired a {item}!")
+    return inventory
+
+def display_inventory(inventory):
+    if not inventory:
+        print("Your inventory is empty.")  
+    else:
+        print("Your inventory:")
+        print(*inventory, sep='\n')
+
+def enter_dungeon(player_health, inventory, dungeon_rooms):
+    for item in dungeon_rooms:
+        print(room_description)
+
+
+
 def main():
     """This function manages the whole code"""
     player_health = 100
@@ -68,6 +88,12 @@ def main():
     player_health = handle_path_choice(player_health)
     treasure_obtained_in_combat = combat_encounter(player_health, monster_health, has_treasure)
     check_for_treasure(treasure_obtained_in_combat)
+    dungeon_rooms = [
+    ("A dusty old library", "key", "puzzle", ("You solved the puzzle!", "The puzzle remains unsolved.", -5)),
+    ("A narrow passage with a creaky floor", None, "trap", ("You skillfully avoid the trap!", "You triggered a trap!", -10)),
+    ("A grand hall with a shimmering pool", "healing potion", "none", None),
+    ("A small room with a locked chest", "treasure", "puzzle", ("You cracked the code!", "The chest remains stubbornly locked.", -5))
+]
 
 if __name__ == "__main__":
     main()
