@@ -74,8 +74,12 @@ def display_inventory(inventory):
         print(*inventory, sep='\n')
 
 def enter_dungeon(player_health, inventory, dungeon_rooms):
-    for item in dungeon_rooms:
-        print(room_description)
+   print(dungeon_rooms[0]) 
+   aquire_item(inventory)
+   if dungeon_rooms[2] == "puzzle":
+    print("You encounter a puzzle!")
+
+        
 
 
 
@@ -88,12 +92,11 @@ def main():
     player_health = handle_path_choice(player_health)
     treasure_obtained_in_combat = combat_encounter(player_health, monster_health, has_treasure)
     check_for_treasure(treasure_obtained_in_combat)
-    dungeon_rooms = [
-    ("A dusty old library", "key", "puzzle", ("You solved the puzzle!", "The puzzle remains unsolved.", -5)),
-    ("A narrow passage with a creaky floor", None, "trap", ("You skillfully avoid the trap!", "You triggered a trap!", -10)),
-    ("A grand hall with a shimmering pool", "healing potion", "none", None),
-    ("A small room with a locked chest", "treasure", "puzzle", ("You cracked the code!", "The chest remains stubbornly locked.", -5))
-]
+    
+    dungeon_rooms = []
+   
+    if player_health > 0:
+        enter_dungeon(player_health, inventory, dungeon_rooms)
 
 if __name__ == "__main__":
     main()
