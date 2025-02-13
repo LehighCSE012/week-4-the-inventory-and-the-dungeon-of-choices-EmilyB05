@@ -74,12 +74,20 @@ def display_inventory(inventory):
         print(*inventory, sep='\n')
 
 def enter_dungeon(player_health, inventory, dungeon_rooms):
-   print(dungeon_rooms[0]) 
-   aquire_item(inventory)
-   if dungeon_rooms[2] == "puzzle":
+   print(f"You enter {dungeon_rooms[0][0]}")
+   print(f"You found a {dungeon_rooms[0][1]}")
+   aquire_item(inventory, dungeon_rooms[0][1])
+   if dungeon_rooms[0][2] == "puzzle":
     print("You encounter a puzzle!")
-
-        
+    solve_or_skip = input("Will you solve or skip the puzzle?")
+    if solve_or_skip == "solve":
+        solve_rate = random.choice([True, False])
+        if solve_rate is True:
+            print(dungeon_rooms[0][3][0])
+        else:
+            print(dungeon_rooms[0][3][1])
+    if solve_or_skip == "skip":
+        print(dungeon_rooms[0][3][1])
 
 
 
@@ -93,8 +101,11 @@ def main():
     treasure_obtained_in_combat = combat_encounter(player_health, monster_health, has_treasure)
     check_for_treasure(treasure_obtained_in_combat)
     
-    dungeon_rooms = []
-   
+    dungeon_rooms = [("A mysterious library", "book", "puzzle", ("You solved the puzzle!", "The puzzle remains unsolved.", -5)),
+    ("a long hallway", "sword", "none", None), 
+    ("a throne room", "crown", "trap", ("You escaped the trap!", "you were caught in the trap", -20))
+    ]
+    
     if player_health > 0:
         enter_dungeon(player_health, inventory, dungeon_rooms)
 
