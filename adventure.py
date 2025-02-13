@@ -95,21 +95,21 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
         if solve_or_skip == "skip":
             print(room[3][1])
         
-        if room[2] == "trap":
-            print("You see a potential trap!")
-            disarm_or_bypass = input("Will you disarm or bypass the trap?")
-            if disarm_or_bypass == "disarm":
-                disarm_rate = random.choice([True, False])
-                if disarm_rate is True:
-                    print(room[3][0])
-                else:
-                    print(room[3][1])
-                    print(f"You lost {room[3][2]} HP.")
-                    player_health += room[3][2]
-            if disarm_or_bypass == "bypass":
+       if room[2] == "trap":
+          print("You see a potential trap!")
+          disarm_or_bypass = input("Will you disarm or bypass the trap?")
+          if disarm_or_bypass == "disarm":
+            disarm_rate = random.choice([True, False])
+            if disarm_rate is True:
+                print(room[3][0])
+            else:
+                print(room[3][1])
+                print(f"You lost {room[3][2]} HP.")
+                player_health += room[3][2]
+          if disarm_or_bypass == "bypass":
                 print(room[3][1])
 
-        display_inventory(inventory)
+       display_inventory(inventory)
 
 
         
