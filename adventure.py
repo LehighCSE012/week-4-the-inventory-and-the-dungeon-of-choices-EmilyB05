@@ -74,21 +74,46 @@ def display_inventory(inventory):
         print(*inventory, sep='\n')
 
 def enter_dungeon(player_health, inventory, dungeon_rooms):
-   print(f"You enter {dungeon_rooms[0][0]}")
-   print(f"You found a {dungeon_rooms[0][1]}")
-   aquire_item(inventory, dungeon_rooms[0][1])
-   if dungeon_rooms[0][2] == "puzzle":
-    print("You encounter a puzzle!")
-    solve_or_skip = input("Will you solve or skip the puzzle?")
-    if solve_or_skip == "solve":
-        solve_rate = random.choice([True, False])
-        if solve_rate is True:
-            print(dungeon_rooms[0][3][0])
-        else:
-            print(dungeon_rooms[0][3][1])
-    if solve_or_skip == "skip":
-        print(dungeon_rooms[0][3][1])
+   for room in dungeon_rooms:
+       print(f"You enter {room[0]}")
+       print(f"You found a {room[1]}")
+       aquire_item(inventory, room[1])
+       if room[2] == "none":
+           print("There doesn't seem to be a challenge in this room. You move on.")
 
+       if room[2] == "puzzle":
+        print("You encounter a puzzle!")
+        solve_or_skip = input("Will you solve or skip the puzzle?")
+        if solve_or_skip == "solve":
+            solve_rate = random.choice([True, False])
+            if solve_rate is True:
+                print(room[3][0])
+            else:
+                print(room[3][1])
+                print(f"You lost {room[3][2]} HP.")
+                player_health += room[3][2]
+        if solve_or_skip == "skip":
+            print(room[3][1])
+        
+        if room[2] == "trap":
+            print("You see a potential trap!")
+            disarm_or_bypass = input("Will you disarm or bypass the trap?")
+            if disarm_or_bypass == "disarm":
+                disarm_rate = random.choice([True, False])
+                if disarm_rate is True:
+                    print(room[3][0])
+                else:
+                    print(room[3][1])
+                    print(f"You lost {room[3][2]} HP.")
+                    player_health += room[3][2]
+            if disarm_or_bypass == "bypass":
+                print(room[3][1])
+
+        display_inventory(inventory)
+
+
+        
+    
 
 
 def main():
