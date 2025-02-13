@@ -80,7 +80,7 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
     """In this section, I use the "in" opperator to run through all the possible dungeon rooms in the list of tuples."""
     for room in dungeon_rooms:
        print(f"You enter {room[0]}")
-       print(f"You found a {room[1]}")
+       print(f"You found a {room[1]} in the room.")
        """I attempt to modify a tuple, which gives an error message since that is impossible."""
        try:
            room[1] = "candle"
