@@ -62,11 +62,14 @@ def check_for_treasure(has_treasure):
         print("The monster did not have the treasure. You continue your journey.")
 
 def aquire_item(inventory, item):
+    """This function allows the items collected to go into the inventory list"""
+    """I used an append opperation to add the item to the end of the list"""
     inventory.append(item)
     print(f"You aquired a {item}!")
     return inventory
 
 def display_inventory(inventory):
+    """This function displays the player's inventory list"""
     if not inventory:
         print("Your inventory is empty.")  
     else:
@@ -74,9 +77,15 @@ def display_inventory(inventory):
         print(*inventory, sep='\n')
 
 def enter_dungeon(player_health, inventory, dungeon_rooms):
+    """In this section, I use the "in" opperator to run through all the possible dungeon rooms in the list of tuples."""
     for room in dungeon_rooms:
        print(f"You enter {room[0]}")
        print(f"You found a {room[1]}")
+       """I attempt to modify a tuple, which gives an error message since that is impossible."""
+       try:
+           room[1] = "candle"
+       except:
+           print("Error: cannot modify a tuple. Tuples are immutable.")
        aquire_item(inventory, room[1])
        if room[2] == "none":
            print("There doesn't seem to be a challenge in this room. You move on.")
@@ -123,11 +132,12 @@ def main():
     treasure_obtained_in_combat = combat_encounter(player_health, monster_health, has_treasure)
     check_for_treasure(treasure_obtained_in_combat)
     
+    """Here is the list of possible dungeon rooms the player encounters"""
     dungeon_rooms = [("A mysterious library", "book", "puzzle", ("You solved the puzzle!", "The puzzle remains unsolved.", -5)),
     ("a long hallway", "sword", "none", None), 
     ("a throne room", "crown", "trap", ("You escaped the trap!", "you were caught in the trap", -20))
     ]
-    
+
     if player_health > 0:
         enter_dungeon(player_health, inventory, dungeon_rooms)
 
