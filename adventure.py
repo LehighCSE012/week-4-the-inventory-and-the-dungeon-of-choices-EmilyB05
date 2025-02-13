@@ -73,8 +73,10 @@ def display_inventory(inventory):
     if not inventory:
         print("Your inventory is empty.")  
     else:
+        """I will use the enumerate function to list out the numbers of the inventory items, follow by their names"""
         print("Your inventory:")
-        print(*inventory, sep='\n')
+        for index, item in enumerate(inventory):
+            print(f"{index + 1}. {item}")
 
 def enter_dungeon(player_health, inventory, dungeon_rooms):
     """In this section, I use the "in" opperator to run through all the possible dungeon rooms in the list of tuples."""
@@ -100,9 +102,9 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
             else:
                 print(room[3][1])
                 print(f"You lost {room[3][2]} HP.")
-                player_health += room[3][2]
         if solve_or_skip == "skip":
             print(room[3][1])
+        player_health += room[3][2]
         
        if room[2] == "trap":
           print("You see a potential trap!")
@@ -114,9 +116,9 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
             else:
                 print(room[3][1])
                 print(f"You lost {room[3][2]} HP.")
-                player_health += room[3][2]
           if disarm_or_bypass == "bypass":
                 print(room[3][1])
+          player_health += room[3][2]
 
        display_inventory(inventory)
        display_player_status(player_health)
