@@ -61,52 +61,55 @@ def check_for_treasure(has_treasure):
     if has_treasure is False:
         print("The monster did not have the treasure. You continue your journey.")
 
-def aquire_item(inventory, item):
+def acquire_item(inventory, item):
     """This function allows the items collected to go into the inventory list"""
     """I used an append opperation to add the item to the end of the list"""
     inventory.append(item)
-    print(f"You aquired a {item}!")
+    print(f"You acquired a {item}!")
     return inventory
 
 def display_inventory(inventory):
     """This function displays the player's inventory list"""
     if not inventory:
-        print("Your inventory is empty.")  
+        print("Your inventory is empty.")
     else:
-        """I will use the enumerate function to list out the numbers of the inventory items, follow by their names"""
+        """I will use the enumerate function to list out the numbers of 
+        the inventory items, follow by their names"""
         print("Your inventory:")
         for index, item in enumerate(inventory):
             print(f"{index + 1}. {item}")
 
 def enter_dungeon(player_health, inventory, dungeon_rooms):
-    """In this section, I use the "in" opperator to run through all the possible dungeon rooms in the list of tuples."""
+    """In this section, I use the "in" opperator to run 
+    through all the possible dungeon rooms in the 
+    list of tuples."""
     for room in dungeon_rooms:
-       print(f"You enter {room[0]}")
-       print(f"You found a {room[1]} in the room.")
-       """I attempt to modify a tuple, which gives an error message since that is impossible."""
-       try:
+        print(f"You enter {room[0]}")
+        print(f"You found a {room[1]} in the room.")
+        """I attempt to modify a tuple, which gives an error message since that is impossible."""
+        try:
            room[1] = "candle"
-       except:
+        except:
            print("Error: cannot modify a tuple. Tuples are immutable.")
-       aquire_item(inventory, room[1])
-       if room[2] == "none":
+        acquire_item(inventory, room[1])
+        if room[2] == "none":
            print("There doesn't seem to be a challenge in this room. You move on.")
 
-       if room[2] == "puzzle":
-        print("You encounter a puzzle!")
-        solve_or_skip = input("Will you solve or skip the puzzle?")
-        if solve_or_skip == "solve":
-            solve_rate = random.choice([True, False])
-            if solve_rate is True:
-                print(room[3][0])
-            else:
+        if room[2] == "puzzle":
+            print("You encounter a puzzle!")
+            solve_or_skip = input("Will you solve or skip the puzzle?")
+            if solve_or_skip == "solve":
+                solve_rate = random.choice([True, False])
+                if solve_rate is True:
+                    print(room[3][0])
+                else:
+                    print(room[3][1])
+                    print(f"You lost {room[3][2]} HP.")
+            if solve_or_skip == "skip":
                 print(room[3][1])
-                print(f"You lost {room[3][2]} HP.")
-        if solve_or_skip == "skip":
-            print(room[3][1])
-        player_health += room[3][2]
+            player_health += room[3][2]
         
-       if room[2] == "trap":
+        if room[2] == "trap":
           print("You see a potential trap!")
           disarm_or_bypass = input("Will you disarm or bypass the trap?")
           if disarm_or_bypass == "disarm":
@@ -120,8 +123,8 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
                 print(room[3][1])
           player_health += room[3][2]
 
-       display_inventory(inventory)
-       display_player_status(player_health)
+        display_inventory(inventory)
+        display_player_status(player_health)
     return player_health, inventory
 
 def main():
