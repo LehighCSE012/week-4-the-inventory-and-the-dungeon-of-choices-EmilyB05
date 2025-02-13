@@ -74,7 +74,7 @@ def display_inventory(inventory):
         print(*inventory, sep='\n')
 
 def enter_dungeon(player_health, inventory, dungeon_rooms):
-   for room in dungeon_rooms:
+    for room in dungeon_rooms:
        print(f"You enter {room[0]}")
        print(f"You found a {room[1]}")
        aquire_item(inventory, room[1])
@@ -110,11 +110,8 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
                 print(room[3][1])
 
        display_inventory(inventory)
-
-
-        
-    
-
+       display_player_status(player_health)
+    return player_health, inventory
 
 def main():
     """This function manages the whole code"""
