@@ -88,12 +88,12 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
         print(f"You found a {room[1]} in the room.")
         """I attempt to modify a tuple, which gives an error message since that is impossible."""
         try:
-           room[1] = "candle"
+            room[1] = "candle"
         except:
-           print("Error: cannot modify a tuple. Tuples are immutable.")
-        acquire_item(inventory, room[1])
+            print("Error: cannot modify a tuple. Tuples are immutable.")
+            acquire_item(inventory, room[1])
         if room[2] == "none":
-           print("There doesn't seem to be a challenge in this room. You move on.")
+            print("There doesn't seem to be a challenge in this room. You move on.")
 
         if room[2] == "puzzle":
             print("You encounter a puzzle!")
@@ -110,19 +110,18 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
             player_health += room[3][2]
         
         if room[2] == "trap":
-          print("You see a potential trap!")
-          disarm_or_bypass = input("Will you disarm or bypass the trap?")
-          if disarm_or_bypass == "disarm":
-            disarm_rate = random.choice([True, False])
-            if disarm_rate is True:
-                print(room[3][0])
-            else:
+            print("You see a potential trap!")
+            disarm_or_bypass = input("Will you disarm or bypass the trap?")
+            if disarm_or_bypass == "disarm":
+                disarm_rate = random.choice([True, False])
+                if disarm_rate is True:
+                    print(room[3][0])
+                else:
+                    print(room[3][1])
+                    print(f"You lost {room[3][2]} HP.")
+            if disarm_or_bypass == "bypass":
                 print(room[3][1])
-                print(f"You lost {room[3][2]} HP.")
-          if disarm_or_bypass == "bypass":
-                print(room[3][1])
-          player_health += room[3][2]
-
+            player_health += room[3][2]
         display_inventory(inventory)
         display_player_status(player_health)
     return player_health, inventory
