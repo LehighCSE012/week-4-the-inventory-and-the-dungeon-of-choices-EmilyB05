@@ -108,7 +108,6 @@ def enter_dungeon(player_health, inventory, dungeon_rooms):
             if solve_or_skip == "skip":
                 print(room[3][1])
             player_health += room[3][2]
-        
         if room[2] == "trap":
             print("You see a potential trap!")
             disarm_or_bypass = input("Will you disarm or bypass the trap?")
@@ -135,11 +134,13 @@ def main():
     player_health = handle_path_choice(player_health)
     treasure_obtained_in_combat = combat_encounter(player_health, monster_health, has_treasure)
     check_for_treasure(treasure_obtained_in_combat)
-    
+
     """Here is the list of possible dungeon rooms the player encounters"""
-    dungeon_rooms = [("A mysterious library", "book", "puzzle", ("You solved the puzzle!", "The puzzle remains unsolved.", -5)),
+    dungeon_rooms = [("A mysterious library", "book", "puzzle", 
+    ("You solved the puzzle!", "The puzzle remains unsolved.", -5)),
     ("a long hallway", "sword", "none", None), 
-    ("a throne room", "crown", "trap", ("You escaped the trap!", "you were caught in the trap", -20))
+    ("a throne room", "crown", "trap", 
+    ("You escaped the trap!", "you were caught in the trap", -20))
     ]
 
     if player_health > 0:
