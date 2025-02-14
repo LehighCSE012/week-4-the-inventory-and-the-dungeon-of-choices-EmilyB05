@@ -73,20 +73,21 @@ def display_inventory(inventory):
     if not inventory:
         print("Your inventory is empty.")
     else:
-        """I will use the enumerate function to list out the numbers of 
+        """I will use the enumerate function to list out the numbers of
         the inventory items, follow by their names"""
         print("Your inventory:")
         for index, item in enumerate(inventory):
             print(f"{index + 1}. {item}")
 
 def enter_dungeon(player_health, inventory, dungeon_rooms):
-    """In this section, I use the "in" opperator to run 
-    through all the possible dungeon rooms in the 
+    """In this section, I use the "in" opperator to run
+    through all the possible dungeon rooms in the
     list of tuples."""
     for room in dungeon_rooms:
         print(f"You enter {room[0]}")
         print(f"You found a {room[1]} in the room.")
-        """I attempt to modify a tuple, which gives an error message since that is impossible."""
+        """I attempt to modify a tuple,
+        which gives an error message since that is impossible."""
         try:
             room[1] = "candle"
         except:
@@ -136,10 +137,10 @@ def main():
     check_for_treasure(treasure_obtained_in_combat)
 
     """Here is the list of possible dungeon rooms the player encounters"""
-    dungeon_rooms = [("A mysterious library", "book", "puzzle", 
+    dungeon_rooms = [("A mysterious library", "book", "puzzle",
     ("You solved the puzzle!", "The puzzle remains unsolved.", -5)),
-    ("a long hallway", "sword", "none", None), 
-    ("a throne room", "crown", "trap", 
+    ("a long hallway", "sword", "none", None),
+    ("a throne room", "crown", "trap",
     ("You escaped the trap!", "you were caught in the trap", -20))
     ]
 
